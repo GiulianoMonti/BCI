@@ -1,7 +1,9 @@
 plugins {
 	id 'java'
+	id 'groovy'
 	id 'org.springframework.boot' version '2.7.9-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
 }
 
 group = 'com.bci'
@@ -15,9 +17,11 @@ repositories {
 }
 
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	annotationProcessor 'org.apache.groovy:groovy-groovysh:4.0.8'
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -30,8 +34,7 @@ dependencies {
 // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	// https://mvnrepository.com/artifact/org.spockframework/spock-core
-	testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
-
+	implementation 'org.spockframework:spock-core:2.3-groovy-4.0'
 
 }
 
