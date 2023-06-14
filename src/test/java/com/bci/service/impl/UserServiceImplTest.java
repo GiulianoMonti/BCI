@@ -13,8 +13,10 @@ import com.bci.repository.UserRepository;
 import com.bci.security.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -24,9 +26,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
     @InjectMocks
@@ -72,8 +76,8 @@ class UserServiceImplTest {
     @Test
     void givenUserObject_whenSaveUser_thenReturnUserObject() {
 
-        given(userRepository.findByEmail(user.getEmail())).willReturn(Optional.of(user));
-        given(userRepository.save(user)).willReturn(user);
+//        given(userRepository.findByEmail(anyString())).willReturn(Optional.of(user));
+        given(userRepository.save(any(UserEntity.class))).willReturn(user);
 
         System.out.println(userRepository);
         System.out.println(userService);
