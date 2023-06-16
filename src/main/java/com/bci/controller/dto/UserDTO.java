@@ -21,8 +21,8 @@ public class UserDTO {
 
     private String username;
 
-    @Email(message = "fdsafdasfasf")
-    @NotEmpty(message = "email is empty")
+    @Email(message = "{error.format.email}")
+    @NotEmpty(message = "{error.empty.email}")
     @Column(unique = true)
     private String email;
 
