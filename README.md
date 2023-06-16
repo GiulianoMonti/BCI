@@ -59,4 +59,7 @@ This project is used by the following companies:
 - BCI
 
 
+## Sequence Diagram
+  ![Imgur](https://i.imgur.com/l71kRFo.png)
+
 ## 🚀 GIULIANO MONTI
