@@ -30,7 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation group: 'org.openidentityplatform.commons', name: 'json-web-token', version: '2.0.17'
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	// https://mvnrepository.com/artifact/org.spockframework/spock-core
