@@ -7,6 +7,7 @@ Api parar registrar un usuario y poder loguearse
 ## Tech Stack
 
 Java, Spring, H2 database, built using Gradle
+Spock,Junit,Mockito
 
 
 
