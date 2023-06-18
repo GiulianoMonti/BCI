@@ -10,6 +10,7 @@ import com.bci.repository.RoleRepository
 import com.bci.repository.UserRepository
 import com.bci.security.JwtTokenProvider
 import com.bci.service.impl.UserServiceImpl
+import org.codehaus.groovy.transform.SourceURIASTTransformation
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -75,14 +76,25 @@ class SpockTest extends Specification {
         given: "mock repositories"
         // lo q va a ser mockeado
         roleRepository.findByName(_ as String) >> Optional.of(roles)
+        tokenProvider.generateTokens(userRequest.getUsername()) >> "token"
+        passwordEncoder.encode(userRequest.getPassword()) >> "password" // checkear
+
         userRepository.save(_ as UserEntity) >> user
 
         when: // llamar al metodo que va a ser testeado
         def result = userService.createUser(userRequest)
 
         then:
-        result != null
+        //1 * roleRepository.findByName("ROLE_ADMIN") // invocacion 1 vez
+        1 * tokenProvider.generateTokens(userRequest.getUsername())
+       // 1 * passwordEncoder.encode(userRequest.getPassword())
+        1 * userRepository.save(_)
 
+        result != null
+        result.username == userRequest.getUsername()
+        result.email == userRequest.getEmail()
+        result.password == "password"
+        result.isActive
     }
 
 }
