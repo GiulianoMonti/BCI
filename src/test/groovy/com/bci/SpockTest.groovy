@@ -13,6 +13,7 @@ import com.bci.service.impl.UserServiceImpl
 import org.codehaus.groovy.transform.SourceURIASTTransformation
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import spock.lang.Specification
 import spock.lang.Subject
@@ -85,9 +86,7 @@ class SpockTest extends Specification {
         def result = userService.createUser(userRequest)
 
         then:
-        //1 * roleRepository.findByName("ROLE_ADMIN") // invocacion 1 vez
         1 * tokenProvider.generateTokens(userRequest.getUsername())
-       // 1 * passwordEncoder.encode(userRequest.getPassword())
         1 * userRepository.save(_)
 
         result != null
@@ -95,6 +94,17 @@ class SpockTest extends Specification {
         result.email == userRequest.getEmail()
         result.password == "password"
         result.isActive
+    }
+
+    def "findByName should return the correct RoleEntity name"() {
+        given: "a role repository instance"
+        roleRepository.findByName(_ as String) >> (roles.getName())
+
+        when:
+        roleRepository.save(roles)
+
+        then: "the name should match"
+        "ROLE_ADMIN" == roles.getName()
     }
 
 }
